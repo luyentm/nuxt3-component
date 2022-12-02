@@ -8,12 +8,19 @@
         <button class="text-white"> Menu </button>
       </div>
     </div>
-    <div class="w-3/4 h-full flex justify-center items-center space-x-2">
-      <Menu :items="items"> Phones </Menu>
-      <Button> Click me </Button>
-    </div>
+    <div class="w-3/4 h-full flex flex-col justify-center items-center">
+      <div class="flex space-x-2 my-2">
+        <Menu :items="items"> Phones </Menu>
+        <Button> Click me </Button>
+      </div>
+      <div>
+        <RickEditor />
+      </div>
 
+
+    </div>
   </div>
+
 </template>
 
 <script setup>
