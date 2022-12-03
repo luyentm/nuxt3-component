@@ -3,8 +3,10 @@
     <div class="flex-1">
       <slot />
     </div>
-    <div class="border-t border-black flex justify-center space-x-3">
-      <div v-for=" i in 5" :key="i">{{ i }}</div>
+    <div class="border-t border-black flex justify-center space-x-3 text-white text-xs py-3">
+      <nuxt-link class="hover:text-yellow-100" to="/">home</nuxt-link>
+      <nuxt-link class="hover:text-yellow-100" to="/builder">builder</nuxt-link>
+      <nuxt-link class="hover:text-yellow-100" to="/components">components</nuxt-link>
     </div>
   </main>
 </template>

@@ -1,30 +1,7 @@
-<template>
-  <div class="flex w-full h-full">
-    <div class="w-1/4 h-full border-r border-black flex flex-col p-2">
-      <div>
-        <button class="text-white"> Button </button>
-      </div>
-      <div>
-        <button class="text-white"> Menu </button>
-      </div>
-    </div>
-    <div class="w-3/4 h-full flex flex-col justify-center items-center">
-      <div class="flex space-x-2 my-2">
-        <Menu :items="items"> Phones </Menu>
-        <Button> Click me </Button>
-      </div>
-      <div>
-        <RickEditor />
-      </div>
-
-
-    </div>
+<template >
+  <div class="w-full h-full flex justify-center items-center md:text-5xl text-sm font-bold text-orange-600 text-shadow-xl">
+    Copyright Luyentm - {{ (new Date()).getFullYear() }}
   </div>
-
 </template>
-
 <script setup>
-const items = ref([
-  { name: 'Iphone' }, { name: 'Pixel' }, { name: 'Nokia' }
-])
 </script>
