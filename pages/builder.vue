@@ -3,31 +3,59 @@
     <div class="h-full flex flex-col border-r border-black min-w-20">
       <div>MyBase</div>
     </div>
-    <div class="flex-1 h-full">
-      sdf
-      <MyBase :items="items"></MyBase>
-      sdf
+    <div class="flex-1 h-full p-3">
+      <MyBase :item="item" :deep="0"></MyBase>
     </div>
   </div>
 </template>
 <script setup>
-const items = ref([
+const item = ref(
   {
-    name: "1",
+    name: "Phones",
     items: [
-      "1", "2", "3"
-    ]
-  }, {
-    name: "2",
-    items: [
-      "1", "2", "3"
+      {
+        name: "Iphone",
+        items: [
+          {
+            name: "IPhone 3",
+            items: [
+              {
+                name: "X",
+                items: []
+              },
+              {
+                name: "XS",
+                items: []
+              }
+            ]
+          },
+          {
+            name: "IPhone 4",
+            items: [
+              {
+                name: "X",
+                items: []
+              },
+              {
+                name: "XS",
+                items: []
+              }
+            ]
+          }, {
+            name: "IPhone 5",
+            items: [{
+              name: "X",
+              items: []
+            },
+            {
+              name: "XS",
+              items: []
+            }
+            ]
+          }
+        ]
+      },
     ]
   },
-  {
-    name: "3",
-    items: [
-      "1", "2", "3"
-    ]
-  }
-])
+)
 </script>
