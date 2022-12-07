@@ -1,14 +1,19 @@
 <script setup>
 let toggle = ref(false)
 defineProps({
-  items: Array
+  items: {
+    type: Array,
+    default: [{ name: 'Iphone' }, { name: 'Android' }, { name: "Windowphone" }]
+  }
 })
 </script>
 
 <template>
-  <div class="relative" @mouseleave="toggle = false">
-    <button class=" bg-blue-200 px-5 py-2 shadow-md font-semibold text-white" :class="!toggle ? 'border-black' : 'border-blue-600 '" @mouseover="toggle = true">
-      <slot />
+  <div class="w-full relative" @mouseleave="toggle = false">
+    <button class="w-full bg-red-600 px-5 py-2 shadow-md font-semibold text-white" :class="!toggle ? 'border-black' : 'border-blue-600 '" @mouseover="toggle = true">
+      <slot>
+        Menu
+      </slot>
     </button>
     <div v-if="toggle" class="absolute left-1/2 -translate-x-1/2 -translate-y-2 z-50">
       <div class="flex flex-col items-center">

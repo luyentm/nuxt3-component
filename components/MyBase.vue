@@ -6,12 +6,11 @@
     tag="ul"
     item-key="id">
     <template #item="{ element, index }">
-      <li class="rounded shadow " :class="(deep % 2) ? 'bg-gray-100' : 'bg-gray-300'">
+      <li class="rounded shadow" :class="(deep % 2) ? 'bg-gray-100' : 'bg-gray-300'">
         <!-- header -->
-        <div class="flex justify-between items-center bg-gray-600">
+        <div class="bg-gray-600 flex justify-between items-center">
           <div class="flex">
             <div class="w-6 h-8 bg-blue-500 handle cursor-pointer"></div>
-            <input type="text" v-model="element.name" class="px1 m1 w-30">
           </div>
           <div class="flex space-x-1 px1">
             <select v-if="(element.items.length > 1)" v-model="element.col">
@@ -26,8 +25,8 @@
         </div>
         <!-- content -->
         <MyBase class="p1 grid gap-1" :class="element.col" v-if="element.items.length" :items="element.items" :deep="(props.deep + 1)"></MyBase>
-        <div v-else class="w-full flex justify-center p1">
-          <component :is="getComponents(element.type)" :items="[{ name: 'Iphone' }, { name: 'Android' }]">Button</component>
+        <div v-else class="w-full flex justify-center p1" @mouseover.self="(show = true)" @mouseleave.self="(show = false)">
+          <component @click="(e)=>clickme(e,element)" class="w-full border-4 border-transparent hover:(border-black )" :is="getComponents(element.type)" />
         </div>
       </li>
     </template>
@@ -65,8 +64,9 @@ function addElement(element) {
   element.items.push({
     name: element.items.length + '',
     items: [],
+    id: element.items.length,
     type: "menu",
-    col: "grid-cols-2",
+    col: "grid-cols-1",
   },)
 }
 function delElement(index) {
@@ -82,5 +82,9 @@ function getComponents(type) {
       return Image
   }
 
+}
+function clickme(e, element) {
+  console.log(e.target)
+  element.type = "image"
 }
 </script>
