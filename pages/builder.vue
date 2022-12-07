@@ -3,7 +3,7 @@
     <div class="h-full flex flex-col border-r border-black min-w-20">
       <div>MyBase</div>
     </div>
-    <div class="flex-1 h-full p-3">
+    <div class="flex-1 p-3 overflow-y-scroll">
       <MyBase :item="item" :deep="0"></MyBase>
     </div>
   </div>

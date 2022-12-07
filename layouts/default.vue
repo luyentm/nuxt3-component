@@ -1,6 +1,6 @@
 <template>
   <main class="bg-gray-700 flex flex-col h-screen">
-    <div class="flex-1">
+    <div class="flex-1 overflow-hidden">
       <slot />
     </div>
     <div class="border-t border-black flex justify-center space-x-3 text-white text-xs py-3">
