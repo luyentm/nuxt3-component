@@ -7,7 +7,7 @@ defineProps({
 
 <template>
   <div class="relative" @mouseleave="toggle = false">
-    <button class=" bg-blue-600 px-5 py-2 shadow-md font-semibold text-white" :class="!toggle ? 'border-black' : 'border-blue-600 '" @mouseover="toggle = true">
+    <button class=" bg-blue-200 px-5 py-2 shadow-md font-semibold text-white" :class="!toggle ? 'border-black' : 'border-blue-600 '" @mouseover="toggle = true">
       <slot />
     </button>
     <div v-if="toggle" class="absolute left-1/2 -translate-x-1/2 -translate-y-2 z-50">

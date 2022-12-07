@@ -9,5 +9,5 @@
   </div>
 </template>
 <script setup>
-const item = ref([{ "name": "1", "items": [], "col": "grid-cols-2" }])
+const item = ref([{ "name": "1", "items": [], "col": "grid-cols-2", type: 'menu' }])
 </script>

@@ -17,6 +17,9 @@
             <select v-if="(element.items.length > 1)" v-model="element.col">
               <option v-for="col in list_col">{{ col }}</option>
             </select>
+            <select v-model="element.type">
+              <option v-for="component_type in list_components">{{ component_type }}</option>
+            </select>
             <div class="bg-white shadow hover:bg-gray-100 px-2 cursor-pointer" @click.self="addElement(element)">+</div>
             <div class="bg-white shadow  hover:bg-gray-100 px-2 cursor-pointer" @click.self="delElement(index)">-</div>
           </div>
@@ -24,7 +27,7 @@
         <!-- content -->
         <MyBase class="p1 grid gap-1" :class="element.col" v-if="element.items.length" :items="element.items" :deep="(props.deep + 1)"></MyBase>
         <div v-else class="w-full flex justify-center p1">
-          <img class="object-contain" src="https://media-cdn-v2.laodong.vn/Storage/NewsPortal/2021/11/10/972631/Taylor-Swift-Enchant.jpg" alt="">
+          <component :is="getComponents(element.type)" :items="[{ name: 'Iphone' }, { name: 'Android' }]">Button</component>
         </div>
       </li>
     </template>
@@ -32,6 +35,9 @@
 </template>
 <script setup>
 import draggable from 'vuedraggable'
+import Button from './Button.vue'
+import Menu from './Menu.vue'
+import Image from './Image.vue'
 const list_col = [
   "grid-cols-1",
   "grid-cols-2",
@@ -42,6 +48,9 @@ const list_col = [
   "grid-cols-7",
   "grid-cols-8",
 
+]
+const list_components = [
+  'button', 'menu', 'image'
 ]
 const props = defineProps({
   items: {
@@ -56,10 +65,22 @@ function addElement(element) {
   element.items.push({
     name: element.items.length + '',
     items: [],
+    type: "menu",
     col: "grid-cols-2",
   },)
 }
 function delElement(index) {
   props.items.splice(index, 1);
+}
+function getComponents(type) {
+  switch (type) {
+    case 'button':
+      return Button
+    case 'menu':
+      return Menu
+    case 'image':
+      return Image
+  }
+
 }
 </script>
