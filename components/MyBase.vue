@@ -6,15 +6,18 @@
     tag="ul"
     item-key="id">
     <template #item="{ element, index }">
-      <li class="rounded shadow" :class="(deep % 2) ? 'bg-gray-100' : 'bg-gray-300'">
+      <li class="rounded shadow bg-gray-200 border border border-gray-300" :class="element.col_span">
         <!-- header -->
-        <div class="bg-gray-600 flex justify-between items-center">
+        <div class="flex justify-between items-center border-b border-gray-300">
           <div class="flex">
-            <div class="w-6 h-8 bg-blue-500 handle cursor-pointer"></div>
+            <div class="px2 rounded-md bg-blue-500 handle cursor-pointer">#</div>
           </div>
           <div class="flex space-x-1 px1">
             <select v-if="(element.items.length > 1)" v-model="element.col">
               <option v-for="col in list_col">{{ col }}</option>
+            </select>
+            <select v-model="element.col_span">
+              <option v-for="col in col_spans">{{ col }}</option>
             </select>
             <select v-model="element.type">
               <option v-for="component_type in list_components">{{ component_type }}</option>
@@ -26,7 +29,7 @@
         <!-- content -->
         <MyBase class="p1 grid gap-1" :class="element.col" v-if="element.items.length" :items="element.items" :deep="(props.deep + 1)"></MyBase>
         <div v-else class="w-full flex justify-center p1" @mouseover.self="(show = true)" @mouseleave.self="(show = false)">
-          <component @click="(e)=>clickme(e,element)" class="w-full border-4 border-transparent hover:(border-black )" :is="getComponents(element.type)" />
+          <component @click="(e)=>clickme(e,element)" class="w-full" :is="getComponents(element.type)" :data="element.data" />
         </div>
       </li>
     </template>
@@ -37,6 +40,7 @@ import draggable from 'vuedraggable'
 import Button from './Button.vue'
 import Menu from './Menu.vue'
 import Image from './Image.vue'
+import Container from './Container.vue'
 const list_col = [
   "grid-cols-1",
   "grid-cols-2",
@@ -46,10 +50,27 @@ const list_col = [
   "grid-cols-6",
   "grid-cols-7",
   "grid-cols-8",
-
+  "grid-cols-9",
+  "grid-cols-10",
+  "grid-cols-11",
+  "grid-cols-12",
+]
+const col_spans = [
+  "col-span-1",
+  "col-span-2",
+  "col-span-3",
+  "col-span-4",
+  "col-span-5",
+  "col-span-6",
+  "col-span-7",
+  "col-span-8",
+  "col-span-9",
+  "col-span-10",
+  "col-span-11",
+  "col-span-12",
 ]
 const list_components = [
-  'button', 'menu', 'image'
+  'button', 'menu', 'image', 'container'
 ]
 const props = defineProps({
   items: {
@@ -57,15 +78,15 @@ const props = defineProps({
   },
   deep: {
     type: Number
-  }
+  },
+  data: String
 })
-
 function addElement(element) {
   element.items.push({
     name: element.items.length + '',
     items: [],
     id: element.items.length,
-    type: "menu",
+    type: "container",
     col: "grid-cols-1",
   },)
 }
@@ -80,11 +101,14 @@ function getComponents(type) {
       return Menu
     case 'image':
       return Image
+    case 'container':
+      return Container
+    default:
+      return Container
   }
 
 }
 function clickme(e, element) {
   console.log(e.target)
-  element.type = "image"
 }
 </script>
