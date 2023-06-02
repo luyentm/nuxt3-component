@@ -1,9 +1,11 @@
 <script setup>
+let icon_url = "/nuxt.png"
+icon_url = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
 useHead({
   title: 'Nuxt3 Components',
   link: [
     {
-      rel: 'icon', type: 'image/png', href: '/nuxt.png',
+      rel: 'icon', type: 'image/png', href: icon_url,
     },
   ],
 })

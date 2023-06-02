@@ -4,8 +4,6 @@ export default defineNuxtConfig({
     '@pinia/nuxt',
   ],
   experimental: {
-    reactivityTransform: true,
-    inlineSSRStyles: false,
   },
   css: [
     '@unocss/reset/tailwind.css',
