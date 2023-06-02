@@ -1,14 +1,14 @@
 <template >
-  <div ref="el" style="position: fixed" class="w-150px h-50px bg-blue-300 cursor-move relative p-1" :class="focus ? 'outline outline-blue-500 outline-1' : 'outline-none'" @mousedown="mouseDown" @mouseup="mouseUp" @mousemove="mouseMove">
-    <div id="anchor00" v-if="focus" class="z-2 absolute top-0 left-0 w-3 h-3  border-l-2 border-t-2 border-blue-600 cursor-nwse-resize"></div>
-    <div id="anchor11" v-if="focus" class="z-2 absolute top-0 right-0 w-3 h-3  border-r-2 border-t-2 border-blue-600 cursor-nesw-resize"></div>
-    <div id="anchor22" v-if="focus" class="z-2 absolute bottom-0 left-0 w-3 h-3  border-l-2 border-b-2 border-blue-600 cursor-nesw-resize"></div>
-    <div id="anchor33" v-if="focus" class="z-2 absolute bottom-0 right-0 w-3 h-3  border-r-2 border-b-2 border-blue-600 cursor-nwse-resize"></div>
+  <div ref="el" style="position: fixed" class="w-150px h-50px bg-blue-300 cursor-move relative p-1" :class="focus ? 'outline outline-blue-500 outline-1' : 'outline-none'" @mousedown="mouseDown" @mousemove="mouseMove">
+    <div id="conner1" v-if="focus" class="z-2 absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white  border-2 rounded-full border-blue-600 cursor-nwse-resize"></div>
+    <div id="conner2" v-if="focus" class="z-2 absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-3 h-3  bg-white  border-2 rounded-full  border-blue-600 cursor-nesw-resize"></div>
+    <div id="conner3" v-if="focus" class="z-2 absolute bottom-0 left-0 w-3 h-3 -translate-x-1/2 translate-y-1/2 bg-white  border-2 rounded-full border-blue-600 cursor-nesw-resize"></div>
+    <div id="conner4" v-if="focus" class="z-2 absolute bottom-0 right-0 w-3 h-3  translate-x-1/2 translate-y-1/2 bg-white  border-2 rounded-full  border-blue-600 cursor-nwse-resize"></div>
 
-    <div id="anchor0" v-if="focus" class="z-1 absolute top-0 right-0 w-full h-1 cursor-ns-resize bg-red"></div>
-    <div id="anchor1" v-if="focus" class="z-1 absolute top-0 left-0 w-1 h-full cursor-ew-resize bg-red"></div>
-    <div id="anchor2" v-if="focus" class="z-1 absolute top-0 right-0 w-1 h-full cursor-ew-resize bg-red"></div>
-    <div id="anchor3" ref="rb" v-if="focus" class="z-1 absolute bottom-0 left-0 w-full h-1 cursor-ns-resize bg-red"></div>
+    <div id="anchor1" v-if="focus" class="z-1 absolute top-0 left-0 -translate-x-1/2 w-1 h-full cursor-ew-resize bg-red"></div>
+    <div id="anchor2" v-if="focus" class="z-1 absolute top-0 left-0 -translate-y-1/2 w-full h-1 cursor-ns-resize bg-red"></div>
+    <div id="anchor3" v-if="focus" class="z-1 absolute top-0 right-0 translate-x-1/2 w-1 h-full cursor-ew-resize bg-red"></div>
+    <div id="anchor4" v-if="focus" class="z-1 absolute bottom-0 right-0 translate-y-1/2 w-full h-1 cursor-ns-resize bg-red"></div>
 
     {{ resize }} <br />
     {{ drag }}
@@ -39,7 +39,7 @@ function mouseDown(event) {
   delY = event.clientY - bounding.top;
   focus.value = true
 
-  if (target.id.startsWith("anchor")) {
+  if (target.id.startsWith("anchor") || target.id.startsWith("conner")) {
     resize.value = 1
   } else {
     drag.value = 1
@@ -56,10 +56,24 @@ watch(() => [x.value, y.value, drag.value], (newValue, oldValue) => {
 
   if (resize.value == 1) {
     // console.log((x.value - el.value.style.left))
-    console.log("el", el.value.style)
-    console.log("x.value", x.value)
-    el.value.style.width = (x.value - el.value.getBoundingClientRect().left) + "px"
-    el.value.style.height = (y.value - el.value.getBoundingClientRect().top) + "px"
+    if (target.id == "anchor4") {
+      el.value.style.height = 10 * parseInt((y.value - el.value.getBoundingClientRect().top + 10) / 10) + "px"
+    } else if (target.id == "anchor3") {
+      el.value.style.width = 10 * parseInt((x.value - el.value.getBoundingClientRect().left + 10) / 10) + "px"
+    } else if (target.id == "anchor2") {
+      let delH = 10 * parseInt((el.value.getBoundingClientRect().top - y.value) / 10)
+      el.value.style.top = el.value.getBoundingClientRect().top - delH + "px"
+      el.value.style.height = el.value.getBoundingClientRect().height + delH + "px"
+    } else if (target.id == "anchor1") {
+      let delW = 10 * parseInt((el.value.getBoundingClientRect().left - x.value + 10) / 10)
+      console.log("🚀 ~ file: BaseItem.vue:69 ~ watch ~ delW:", delW)
+      el.value.style.width = el.value.getBoundingClientRect().width + delW + "px"
+      el.value.style.left = el.value.getBoundingClientRect().left - delW + "px"
+      console.log("🚀 ~ file: BaseItem.vue:71 ~ watch ~  el.value.style.width:", el.value.style.width)
+    } else {
+      el.value.style.height = 10 * parseInt((y.value - el.value.getBoundingClientRect().top + 10) / 10) + "px"
+      el.value.style.width = 10 * parseInt((x.value - el.value.getBoundingClientRect().left + 10) / 10) + "px"
+    }
   }
 })
 
@@ -69,10 +83,9 @@ function mouseMove() {
   }
 }
 
-function mouseUp() {
+document.body.onmouseup = function () {
   drag.value = 0
   resize.value = 0
-  console.log("UP")
 }
 </script>
 
