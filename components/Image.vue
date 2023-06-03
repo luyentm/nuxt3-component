@@ -9,7 +9,5 @@ defineProps({
 </script>
 
 <template>
-  <div>
-    <img class="object-contain" :src="data" alt="">
-  </div>
+  <img class="object-cover w-full h-full" :src="data" alt="">
 </template>

@@ -1,8 +1,9 @@
-<script setup>
-</script>
-
 <template>
-  <div class="w-full min-h-10 bg-white flex justify-center items-center">
-    <span class="text-gray-400">container</span>
+  <div class="w-full h-full bg-blue-600 px-5 py-2 shadow-md font-semibold text-white duration-75">
+    {{ modelValue.class }}
   </div>
 </template>
+
+<script setup>
+defineProps(['modelValue'])
+</script>

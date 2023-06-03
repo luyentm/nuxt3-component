@@ -1,8 +1,7 @@
 <script setup>
 let icon_url = "/nuxt.png"
-icon_url = "https://www.google.com/images/branding/googlelogo/1x/googlelogo_color_272x92dp.png"
 useHead({
-  title: 'Nuxt3 Components',
+  title: 'Luyen',
   link: [
     {
       rel: 'icon', type: 'image/png', href: icon_url,
@@ -29,5 +28,13 @@ body,
 html.dark {
   background: #222;
   color: white;
+}
+
+.router-link-exact-active {
+  font-weight: 600;
+}
+
+.button {
+  @apply bg-white text-blue-800 shadow rounded px-2 py-0.5 shadow-lg select-none duration-300 outline outline-1 hover:(bg-blue-800 text-white)
 }
 </style>

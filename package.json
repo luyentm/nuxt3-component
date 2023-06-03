@@ -19,6 +19,7 @@
     "typescript": "^4.9.3"
   },
   "dependencies": {
+    "@iconify-json/mdi": "^1.1.52",
     "@tinymce/tinymce-vue": "^4.0.7",
     "@vueuse/core": "^10.1.2",
     "vuedraggable": "^4.1.0"

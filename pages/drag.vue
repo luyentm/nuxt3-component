@@ -1,16 +1,26 @@
 <template >
   <div class="h-full grid">
-    <button @click="addItem" class="fixed bottom-8 left-1/2 py-1 bg-blue-800 text-white px-8 rounded shadow-lg select-none -translate-x-1/2">+</button>
-    <BaseItem v-for="item in items" />
+
+    <BaseItem v-for="(item, index) in items" v-model="item.data" :key="index" />
+    <div class="w-full fixed bottom-8 left-0 flex justify-center space-x-2">
+      <button @click="addItem" class="button">
+        <div class="i-mdi:card-plus-outline"></div>
+      </button>
+      <button class="button">
+        <div class="i-mdi:card-multiple-outline"></div>
+      </button>
+    </div>
   </div>
 </template>
 <script setup>
 const items = ref([])
-import { useResize } from '../useResize'
-
 function addItem() {
   items.value.push({
-    style: "top:100px;left:100px"
+    type: "container",
+    data: {
+      style: "top:100px;left:100px",
+      class:"rounded"
+    }
   })
 }
 </script>
