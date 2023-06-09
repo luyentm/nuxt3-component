@@ -9,5 +9,17 @@ defineProps({
 </script>
 
 <template>
-  <img class="object-cover w-full h-full" :src="data" alt="">
+  <img class="object-cover w-full h-full selector" :src="data" alt="">
 </template>
+
+<style lang="css">
+.selector {
+  user-drag: none;
+  -webkit-user-drag: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
+  pointer-events: none;
+}
+</style>
