@@ -1,28 +1,46 @@
 <template >
-  <div class="h-full flex justify-center">
-    <div class="grid" :class="is_mobile ? 'w-421px' : 'w-1201px'">
+  <div class="h-full flex justify-between space-x-5">
+
+    <div class="w-full h-full border-r bg-gray-100/50">
+
+    </div>
+    <div class="grid flex-shrink-0" :class="is_mobile ? 'w-421px' : 'w-1201px'">
       <BaseItem v-for="(item, index) in items" v-model="item.data" :key="index" />
     </div>
-    <div class="w-full fixed bottom-8 left-0 flex justify-center space-x-2">
-      <button @click="addItem" class="button">
-        <div class="i-mdi:card-plus-outline"></div>
-      </button>
-      <button class="button">
-        <div class="i-mdi:card-multiple-outline"></div>
-      </button>
 
-      <button @click="is_mobile = false" class="button" :class="!is_mobile ? '!bg-blue' : ''">
+    <div class="w-full h-full border-l bg-gray-200 p-2">
+      <div class="flex flex-col card">
+        <div class="">rounded</div>
+        <div class=" text-3 flex flex-wrap">
+          <button @click="clickRounded('rounded-none')">rounded-none</button>
+          <button @click="clickRounded('rounded')">rounded</button>
+          <button @click="clickRounded('rounded-md')">rounded-md</button>
+          <button @click="clickRounded('rounded-lg')">rounded-lg</button>
+          <button @click="clickRounded('rounded-xl')">rounded-xl</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-full fixed bottom-8 left-0 flex justify-center space-x-2">
+      <div @click="addItem" class="button">
+        <div class="i-mdi:card-plus-outline"></div>
+      </div>
+      <div class="button">
+        <div class="i-mdi:card-multiple-outline"></div>
+      </div>
+
+      <div @click="is_mobile = false" class="button" :class="!is_mobile ? '!bg-blue' : ''">
         <div class="i-mdi:desktop-mac"></div>
-      </button>
-      <button @click="is_mobile = true" class="button" :class="is_mobile ? '!bg-blue' : ''">
+      </div>
+      <div @click="is_mobile = true" class="button" :class="is_mobile ? '!bg-blue' : ''">
         <div class="i-mdi:cellphone-iphone"></div>
-      </button>
+      </div>
     </div>
   </div>
 </template>
 <script setup>
 const items = ref([])
-const is_mobile = ref(true)
+const is_mobile = ref(false)
 function addItem() {
   items.value.push({
     type: "container",
@@ -33,6 +51,11 @@ function addItem() {
   })
 }
 
+function clickRounded(value) {
+  console.log("🚀 ~ file: drag.vue:55 ~ clickRounded ~ value:", value)
+}
+
+
 </script>
 <style lang="css">
 .grid {
@@ -40,5 +63,13 @@ function addItem() {
   padding: 0;
   background-image: linear-gradient(rgba(0, 0, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 0, 0, 0.1) 1px, transparent 1px);
   background-size: 10px 10px;
+}
+
+button {
+  @apply px-1 m-1px bg-white border border-blue
+}
+
+.card {
+  @apply bg-white shadow p-2
 }
 </style>

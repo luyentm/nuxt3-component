@@ -35,6 +35,6 @@ html.dark {
 }
 
 .button {
-  @apply bg-white text-blue-800 shadow rounded px-2 py-0.5 shadow-lg select-none duration-300 outline outline-1 hover: (bg-blue-800 text-white)
+  @apply bg-white text-blue-800 shadow rounded px-2 py-0.5 shadow-lg select-none duration-300 outline outline-1 hover:(bg-blue-800 text-white) cursor-pointer
 }
 </style>

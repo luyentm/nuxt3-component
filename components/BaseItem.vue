@@ -1,6 +1,6 @@
 <template >
   <div ref="el" style="position: fixed" class="w-150px h-50px cursor-move relative" :class="focus ? 'outline outline-blue-500 outline-2 outline-dashed' : 'outline-none'" @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseUp">
-    <Image v-model="value_data" class="z-0 select-none" :class="value_data.class" />
+    <Container v-model="value_data" class="z-0 select-none" :class="value_data.class" />
     <div>
       <div id="conner1" v-if="focus" class="z-2 absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white  border-2 rounded-full border-blue-600 cursor-nwse-resize"></div>
       <div id="conner2" v-if="focus" class="z-2 absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-3 h-3  bg-white  border-2 rounded-full  border-blue-600 cursor-nesw-resize"></div>
