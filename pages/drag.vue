@@ -4,7 +4,7 @@
     <div class="w-full h-full border-r bg-gray-100/50">
 
     </div>
-    <div class="grid flex-shrink-0" :class="is_mobile ? 'w-421px' : 'w-1201px'">
+    <div class="grid flex-shrink-0 relative overflow-hidden" :class="is_mobile ? 'w-421px' : 'w-1201px'">
       <BaseItem v-for="(item, index) in items" v-model="item.data" :key="index" />
     </div>
 
@@ -12,11 +12,7 @@
       <div class="flex flex-col card">
         <div class="">rounded</div>
         <div class=" text-3 flex flex-wrap">
-          <button @click="clickRounded('rounded-none')">rounded-none</button>
-          <button @click="clickRounded('rounded')">rounded</button>
-          <button @click="clickRounded('rounded-md')">rounded-md</button>
-          <button @click="clickRounded('rounded-lg')">rounded-lg</button>
-          <button @click="clickRounded('rounded-xl')">rounded-xl</button>
+          <button @click="clickRounded(r)" v-for="r in rounded">{{ r }}</button>
         </div>
       </div>
     </div>
@@ -39,13 +35,14 @@
   </div>
 </template>
 <script setup>
+const rounded = ["rounded-none", "rounded", "rounded-md", "rounded-lg", "rounded-xl"]
 const items = ref([])
 const is_mobile = ref(false)
 function addItem() {
   items.value.push({
     type: "container",
     data: {
-      style: "top:100px;left:100px",
+      style: "",
       class: ""
     }
   })

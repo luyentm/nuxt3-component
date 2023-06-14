@@ -1,7 +1,7 @@
 <script setup>
 let icon_url = "/nuxt.png"
 useHead({
-  title: 'Luyen',
+  title: 'builder',
   link: [
     {
       rel: 'icon', type: 'image/png', href: icon_url,
