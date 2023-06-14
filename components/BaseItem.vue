@@ -1,7 +1,6 @@
 <template >
   <div ref="el" style="position: absolute" class="cursor-move relative w-100px h-50px" :class="focus ? 'outline outline-blue-500 outline-2 outline-dashed' : 'outline-none'" @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseUp">
     <Container v-model="value_data" class="z-0 select-none" :class="value_data.class" />
-    {{ x }} {{ y }}
     <div>
       <div id="conner1" v-if="focus" class="z-2 absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white  border-2 rounded-full border-blue-600 cursor-nwse-resize"></div>
       <div id="conner2" v-if="focus" class="z-2 absolute top-0 right-0 translate-x-1/2 -translate-y-1/2 w-3 h-3  bg-white  border-2 rounded-full  border-blue-600 cursor-nesw-resize"></div>
@@ -65,7 +64,6 @@ watch(() => [x.value, y.value, drag.value], (newValue, oldValue) => {
     el.value.style.left = `${_x}px`
     el.value.style.top = `${_y}px`
   }
-
   if (resize.value == 1) {
     if (target.value.id == "anchor4") {
       el.value.style.height = 10 * Math.round((y.value - el.value.getBoundingClientRect().top) / 10) + "px"
@@ -82,8 +80,8 @@ watch(() => [x.value, y.value, drag.value], (newValue, oldValue) => {
       el.value.style.left = el.value.getBoundingClientRect().left + delW - el.value.parentElement.getBoundingClientRect().left + "px"
       el.value.style.width = el.value.getBoundingClientRect().width - delW + "px"
     } else {
-      // el.value.style.height = 10 * Math.round((y.value - el.value.getBoundingClientRect().top - el.value.parentElement.getBoundingClientRect().top) / 10) + "px"
-      // el.value.style.width = 10 * Math.round((x.value - el.value.getBoundingClientRect().left - el.value.parentElement.getBoundingClientRect().left) / 10) + "px"
+      el.value.style.height = 10 * Math.round((y.value - el.value.getBoundingClientRect().top) / 10) + "px"
+      el.value.style.width = 10 * Math.round((x.value - el.value.getBoundingClientRect().left) / 10) + "px"
     }
   }
 })
@@ -100,7 +98,8 @@ function mouseUp() {
 }
 
 
-document.body.onmouseup = function () {
+document.body.onmouseup = function (e) {
+  console.log("onmouseup:", e)
   drag.value = 0
   resize.value = 0
 }
